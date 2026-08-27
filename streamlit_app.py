@@ -1,147 +1,181 @@
 import streamlit as st
 
-# إعدادات واجهة التطبيق
-st.set_page_config(page_title="مساعد التفوق - الثالثة إعدادي", page_icon="🎓", layout="centered")
+st.set_page_config(page_title="الأستاذ المنزلي الشامل - 3AC", page_icon="📝", layout="wide")
 
-st.title("🎓 مساعدكِ الذكي للتفوق في الثالثة إعدادي")
-st.write("مرحباً بكِ يا آية! أنا أستاذكِ الشامل في البيت، سأساعدكِ في روتينكِ اليومي وفي جميع مواد الموحد خطوة بخطوة من الأسهل للأصعب لتضمني ميزة حسن جداً! 🎯")
+# العنوان الرئيسي للتطبيق
+st.title("👨‍🏫 الأستاذ المنزلي الذكي لثالثة إعدادي (مسار دولي - المغرب)")
+st.write("مرحباً بكِ يا آية في نظامكِ الدراسي المتكامل. هنا تجدين الشرح العميق، التمارين الكاملة، الامتحانات القابلة للطباعة ومساعد المشاريع.")
 
-# القائمة الجانبية للتنقل بين المواد والأقسام
-menu = st.sidebar.selectbox("📂 اختر القسم أو المادة البرمجية:", [
-    "📅 روتين تنظبم الوقت اليومي",
-    "📐 1. الرياضيات (Maths)",
-    "🧪 2. الفيزياء والكيمياء (Physique)",
-    "🧬 3. علوم الحياة والأرض (SVT)",
-    "🇫🇷 4. اللغة الفرنسية (Français)",
-    "🕌 5. التربية الإسلامية",
-    "🌍 6. الاجتماعيات",
-    "📚 7. اللغة العربية",
-    "🛠️ ركن المشاريع ونصائح الامتحان"
+# القائمة الجانبية المتطورة
+menu = st.sidebar.selectbox("📚 تصفح الأقسام والمواد:", [
+    "📅 روتينكِ اليومي الموازن",
+    "📐 الرياضيات (Mathématiques)",
+    "🧪 الفيزياء والكيمياء (PC)",
+    "🧬 علوم الحياة والأرض (SVT)",
+    "🇬🇧 اللغة الإنجليزية (English 3AC)",
+    "🇫🇷 اللغة الفرنسية (Français)",
+    "📝 الامتحانات الموحدة الكاملة (PDF / للطباعة)",
+    "🛠️ مساعد المشاريع المدرسية والبحوث الذكي"
 ])
 
 # ==================== قسم الروتين اليومي ====================
-if menu == "📅 روتين تنظبم الوقت اليومي":
-    st.header("🕒 تنظيم روتينك الدراسي اليومي")
-    school_start = st.number_input("⏰ في أي ساعة تدخلين المدرسة عادةً؟", min_value=0, max_value=23, value=8)
-    school_end = st.number_input("⏰ في أي ساعة تخرجين من المدرسة؟", min_value=0, max_value=23, value=16)
+if menu == "📅 روتينكِ اليومي الموازن":
+    st.header("🕒 روتين تنظيم وقت الدراسة والمدرسة")
+    school_start = st.number_input("⏰ ساعة دخول المدرسة (صباحاً):", 0, 23, 8)
+    school_end = st.number_input("⏰ ساعة الخروج من المدرسة (مساءً):", 0, 23, 16)
     
-    if st.button("🚀 توليد جدولي اليومي"):
+    if st.button("🚀 توليد الجدول اليومي"):
         study_start = school_end + 2
-        st.success("✅ تم موازنة جدولكِ وصناعة الروتين!")
-        st.info(f"🏫 **المدرسة:** من {school_start}:00 إلى {school_end}:00.")
-        st.warning(f"🍔 **الراحة والغداء:** من {school_end}:00 إلى {study_start}:00.")
-        st.success(f"💻 **موعدنا للمراجعة والتمارين:** سأنتظركِ في تمام الساعة {study_start}:00 لنبدأ التحدي!")
+        st.success("✅ تم موازنة جدولكِ!")
+        st.info(f"🏫 **وقت المدرسة:** من {school_start}:00 إلى {school_end}:00.")
+        st.warning(f"🍔 **راحة وغداء:** من {school_end}:00 إلى {study_start}:00.")
+        st.success(f"💻 **وقت المذاكرة والتمارين مع الأستاذ:** يبدأ في تمام الساعة {study_start}:00!")
 
 # ==================== 1. الرياضيات ====================
-elif menu == "📐 1. الرياضيات (Maths)":
-    st.header("📐 مادة الرياضيات: مبرهنة فيتاغورس")
-    level = st.radio("اختر مستوى الصعوبة:", ["🟢 تمرين سهل (مباشر)", "🟡 تمرين متوسط (محلي)", "🔴 تمرين تحدي (جهوي)"])
+elif menu == "📐 الرياضيات (Mathématiques)":
+    st.header("📐 مادة الرياضيات - المسار الدولي")
+    tab1, tab2 = st.tabs(["📖 شرح الدروس الكامل", "📝 سلسلة التمارين والتصحيح"])
     
-    if level == "🟢 تمرين سهل (مباشر)":
-        st.markdown("**التمرين:** مثلث $ABC$ قائم الزاوية في $A$. إذا كان $AB = 3$ و $AC = 4$، احسبي طول الوتر $BC$.")
-        user_ans = st.text_input("اكتبي الجواب (رقم فقط):")
-        if st.button("🔍 صحح لي"):
-            if user_ans.strip() == "5":
-                st.balloons()
-                st.success("👑 روعة! إجابة صحيحة 100%. $BC = 5$.")
-            else:
-                st.error("❌ خطأ، تذكري أن $BC^2 = AB^2 + AC^2$.")
-
-    elif level == "🟡 تمرين متوسط (محلي)":
-        st.markdown("**التمرين:** مثلث $EFG$ قائم الزاوية في $E$. إذا كان الوتر $FG = 10$ والضلع $EF = 6$. احسبي $EG$.")
-        user_ans_m = st.text_input("اكتبي الجواب:")
-        if st.button("🔍 صحح لي"):
-            if user_ans_m.strip() == "8":
-                st.success("🔥 ذكية جداً! بما أن الوتر معلوم نطرح المربعين: $EG = 8$.")
-            else:
-                st.error("❌ الجواب يحتاج مراجعة، استخدمي الطرح لأن الوتر معلوم.")
-
-    elif level == "🔴 تمرين تحدي (جهوي)":
-        st.markdown("**التمرين:** إذا كان $\cos(\alpha) = 0.6$، احسبي $\sin(\alpha)$ باستخدام الحساب المثلثي.")
-        user_ans_h = st.text_input("اكتبي الجواب (مثلاً 0.8):")
-        if st.button("🔍 صحح لي"):
-            if user_ans_h.strip() == "0.8":
-                st.balloons()
-                st.success("🎯 عبقرية! استخدمتِ القاعدة الذهبية: $\cos^2(\alpha) + \sin^2(\alpha) = 1$.")
-            else:
-                st.error("❌ ركزي في علاقات الحساب المثلثي.")
+    with tab1:
+        st.subheader("1. درس مبرهنة فيتاغورس (Théorème de Pythagore)")
+        st.markdown("""
+        * **Théorème Direct (المباشرة):** Si un triangle $ABC$ est rectangle en $A$, alors : $BC^2 = AB^2 + AC^2$. 
+          * *الهدف:* حساب طول ضلع (غالباً الوتر) عندما يكون المثلث قائم الزاوية ومعلوم فيه ضلعان.
+        * **Théorème Réciproque (العكسية):** Si dans un triangle $ABC$ on a $BC^2 = AB^2 + AC^2$, alors le triangle est rectangle en $A$.
+          * *الهدف:* البرهنة وإثبات أن المثلث قائم الزاوية.
+        """)
+        st.subheader("2. درس الحساب المثلثي (Calcul Trigonométrique)")
+        st.markdown("""
+        Dans un triangle rectangle, pour un angle aigu $\alpha$ :
+        * $\cos(\alpha) = \\frac{\\text{Côté adjacent}}{\\text{Hypoténuse}}$
+        * $\sin(\alpha) = \\frac{\\text{Côté opposé}}{\\text{Hypoténuse}}$
+        * $\\tan(\alpha) = \\frac{\\text{Côté oppposé}}{\\text{Côté adjacent}} = \\frac{\\sin(\alpha)}{\\cos(\alpha)}$
+        * **Formule Dorée (القاعدة الذهبية):** $\cos^2(\alpha) + \sin^2(\alpha) = 1$
+        """)
+        
+    with tab2:
+        st.subheader("سلسلة تمارين الرياضيات الكاملة")
+        ans1 = st.text_input("Q1: ABC rectangle en A, AB=6, AC=8. Calculez BC (le côté hypoténuse) :")
+        ans2 = st.text_input("Q2: Sachant que cos(α) = 0.6, calculez sin(α) :")
+        
+        if st.button("🔍 تصحيح السلسلة كاملاً"):
+            score = 0
+            if ans1.strip() == "10": score += 1; st.success("Q1: صحيح! $BC^2 = 36 + 64 = 100 \\implies BC=10$.")
+            else: st.error("Q1: خطأ. تذكر أن $BC^2 = AB^2 + AC^2$.")
+            
+            if ans2.strip() == "0.8": score += 1; st.success("Q2: صحيح! استخدام القاعدة $\sin^2(\\alpha) = 1 - 0.6^2 = 0.64$.")
+            else: st.error("Q2: خطأ. راجع قاعدة $\cos^2(\\alpha) + \sin^2(\\alpha) = 1$.")
+            st.metric("نقطتك الإجمالية في السلسلة:", f"{score}/2")
 
 # ==================== 2. الفيزياء والكيمياء ====================
-elif menu == "🧪 2. الفيزياء والكيمياء (Physique)":
-    st.header("🧪 مادة الفيزياء والكيمياء: المحاليل الحمضية والقاعدية")
-    ph_value = st.slider("حركي المؤشر لتحديد قيمة الـ pH للمحلول:", 0.0, 14.0, 7.0)
-    if st.button("🔍 تحديد نوع المحلول"):
-        if ph_value < 7:
-            st.warning(f"محلول حمضي لأن pH = {ph_value} (أصغر من 7). 🍋")
-        elif ph_value == 7:
-            st.success(f"محلول محايد لأن pH = {ph_value} (يساوي 7). 💧")
-        else:
-            st.error(f"محلول قاعدي لأن pH = {ph_value} (أكبر من 7). 🧼")
+elif menu == "🧪 الفيزياء والكيمياء (PC)":
+    st.header("🧪 مادة الفيزياء والكيمياء - Physique et Chimie")
+    tab1, tab2 = st.tabs(["📖 شرح الدروس الكامل", "📝 سلسلة التمارين والتصحيح"])
+    
+    with tab1:
+        st.subheader("1. درس أمثلة لبعض المواد المستعملة في حياتنا اليومية")
+        st.markdown("نميز بين **الأجسام (Objets)** و **المواد (Matériaux)**. الجسم يُصنع من مادة أو أكثر (مثال: الكأس جسم، الزجاج مادة).")
+        st.subheader("2. درس أكسدة المواد في الهواء (Oxydation)")
+        st.markdown("""
+        * **Oxydation du Fer (أكسدة الحديد):** Forme la rouille (الصدأ) selon l'équation : $4Fe + 3O_2 \\implies 2Fe_2O_3$ (Oxyde de fer III). C'est une couche poreuse (منفذة للهواء).
+        * **Oxydation de l'Aluminium (أكسدة الألومنيوم):** Forme l'alumine : $4Al + 3O_2 \\implies 2Al_2O_3$. C'est une couche non poreuse qui protège le métal.
+        """)
+        
+    with tab2:
+        st.subheader("سلسلة تمارين الفيزياء")
+        q_pc = st.radio("L'équation chimique de la formation de la rouille est :", ["2Fe + O2 -> 2FeO", "4Fe + 3O2 -> 2Fe2O3", "Fe + O2 -> FeO2"])
+        if st.button("🔍 تصحيح تمرين الفيزياء"):
+            if q_pc == "4Fe + 3O2 -> 2Fe2O3": st.balloons(); st.success("ممتاز! معادلة أكسدة الحديد صحيحة ومتوازنة.")
+            else: st.error("إجابة خاطئة. الحديد يتفاعل مع ثنائي الأكسجين ليعطي أكسيد الحديد الثالث.")
 
 # ==================== 3. علوم الحياة والأرض ====================
-elif menu == "🧬 3. علوم الحياة والأرض (SVT)":
-    st.header("🧬 علوم الحياة والأرض: الهضم والتربية الغذائية")
-    st.markdown("**السؤال للموحد:** ما هي المادة المسؤولة عن الكشف عن وجود **النشا** في الأغذية؟")
-    svt_ans = st.radio("اختر الإجابة الصحيحة:", ["ماء الجير", "الماء اليودي (Eau iodée)", "محلول فيهلينغ"])
-    if st.button("🔍 صحح إجابتي"):
-        if svt_ans == "الماء اليودي (Eau iodée)":
-            st.balloons()
-            st.success("🎯 إجابة صحيحة وممتازة! الماء اليودي يكشف عن النشا.")
-        else:
-            st.error("❌ إجابة خاطئة! راجعي كواشف الأغذية.")
+elif menu == "🧬 علوم الحياة والأرض (SVT)":
+    st.header("🧬 علوم الحياة والأرض - SVT")
+    tab1, tab2 = st.tabs(["📖 شرح الدروس الكامل", "📝 سلسلة التمارين والتصحيح"])
+    
+    with tab1:
+        st.subheader("1. الهضم والامتصاص المعوي (Digestion et Absorption)")
+        st.markdown("""
+        * **الهضم الهضمي والميكانيكي:** تحول الأغذية إلى **مواد القيت (Nutriments)** تحت تأثير الأنزيمات الهضمية (Les enzymes).
+        * **الامتصاص:** يتم في الأمعاء الدقيقة بواسطة **الزغابات المعوية (Les villosités intestinales)** التي تنقل القيت إلى الدم واللمف.
+        """)
+    with tab2:
+        st.subheader("سلسلة تمارين SVT")
+        q_svt = st.radio("Où se déroule l'absorption des nutriments ?", ["L'estomac (المعدة)", "L'intestin grêle (الأمعاء الدقيقة)", "Le gros intestin"])
+        if st.button("🔍 تصحيح تمرين SVT"):
+            if q_svt == "L'intestin grêle (الأمعاء الدقيقة)": st.success("صحيح! الزغابات المعوية توجد في الأمعاء الدقيقة وهي مقر الامتصاص.")
+            else: st.error("خاطئ. راجعي دور الأمعاء الدقيقة في الامتصاص المعوي.")
 
-# ==================== 4. اللغة الفرنسية ====================
-elif menu == "🇫🇷 4. اللغة الفرنسية (Français)":
-    st.header("🇫🇷 La Langue Française: La Subordonnée de Cause")
-    st.markdown("**Question:** Choisissez la bonne conjonction pour exprimer la cause au début de la phrase:")
-    fr_ans = st.radio("Sélectionnez:", ["parce que", "Comme", "car"])
-    if st.button("🔍 Corriger mon exercice"):
-        if fr_ans == "Comme":
-            st.balloons()
-            st.success("Très bien! 'Comme' s'utilise au début de la phrase.")
-        else:
-            st.error("Faux! 'parce que' et 'car' s'utilisent au milieu.")
+# ==================== 4. اللغة الإنجليزية ====================
+elif menu == "🇬🇧 اللغة الإنجليزية (English 3AC)":
+    st.header("🇬🇧 English - 3rd Year Secondary School (Maroc)")
+    tab1, tab2 = st.tabs(["📖 Grammar & Vocabulary Explanations", "📝 Practice Exercises"])
+    
+    with tab1:
+        st.subheader("1. Greeting and Introducing People")
+        st.markdown("""
+        * **Introducing yourself:** "Hello, my name is Aya. I am a student."
+        * **Introducing others:** "This is my friend, she is in 3rd prep."
+        """)
+        st.subheader("2. Present Simple Tense")
+        st.markdown("""
+        Used for habits and facts. 
+        * *Rule:* I/You/We/They + Verb | He/She/It + Verb+(s/es)
+        * *Example:* "I **study** English every day." | "She **studies** mathematics."
+        """)
+    with tab2:
+        st.subheader("English Practice Test")
+        eng_ans = st.text_input("Fill in the blank: He ________ (go) to school at 8 AM.")
+        if st.button("🔍 Check English Answer"):
+            if eng_ans.strip().lower() == "goes": st.balloons(); st.success("Correct! With 'He', we add 'es' to the verb 'go'.")
+            else: st.error("Incorrect. Remember the Present Simple rule for He/She/It (go -> goes).")
 
-# ==================== 5. التربية الإسلامية ====================
-elif menu == "🕌 5. التربية الإسلامية":
-    st.header("🕌 مادة التربية الإسلامية: القرآن الكريم والمفاهيم")
-    st.markdown("**سؤال الموحد:** في أي سورة وردت قصة (أصحاب الجنة)؟")
-    isl_ans = st.radio("اختر السورة:", ["سورة القلم", "سورة الحجرات", "سورة لقمان"])
-    if st.button("🔍 تحقق من الحفظ"):
-        if isl_ans == "سورة القلم":
-            st.success("🕋 أحسنتِ وجزاكِ الله خيراً! وردت في سورة القلم.")
-        else:
-            st.error("❌ إجابة خاطئة، راجعي حفظ سورة القلم.")
+# ==================== 5. اللغة الفرنسية ====================
+elif menu == "🇫🇷 اللغة الفرنسية (Français)":
+    st.header("🇫🇷 Langue Française - 3AC")
+    st.write("دروس الدورة الأولى تركز على القصة والرسالة وقواعد التعبير عن السبب والنتيجة.")
+    fr_q = st.text_input("Complétez avec l'expression de cause correcte: Il est absent ______ il est malade. (car / comme)")
+    if st.button("🔍 Corriger"):
+        if fr_q.strip().lower() == "car": st.success("Bravo! 'car' se place au milieu pour exprimer la cause.")
+        else: st.error("Faux. 'Comme' se place au début de la phrase.")
 
-# ==================== 6. الاجتماعيات ====================
-elif menu == "🌍 6. الاجتماعيات":
-    st.header("🌍 مادة الاجتماعيات: التاريخ والجغرافيا")
-    st.markdown("**سؤال التاريخ:** ما هي السنة التي تم فيها توقيع معاهدة الحماية على المغرب؟")
-    hist_ans = st.text_input("اكتبي السنة (مثال: 1912):")
-    if st.button("🔍 صحح لي التاريخ"):
-        if hist_ans.strip() == "1912":
-            st.success("🇲🇦 ممتاز جداً! تم توقيع معاهدة الحماية في 30 مارس 1912 م.")
-        else:
-            st.error("❌ التاريخ غير صحيح، تذكري سنة 1912 دائماً!")
-
-# ==================== 7. اللغة العربية ====================
-elif menu == "📚 7. اللغة العربية":
-    st.header("📚 مادة اللغة العربية: الدرس اللغوي")
-    st.markdown("**التمرين:** حددي نوع الأسلوب في الجملة التالية: *(ما أجملَ تفوقَ آيةَ في الموحدِ!)*")
-    ar_ans = st.radio("اختر نوع الأسلوب:", ["أسلوب الاختصاص", "أسلوب التعجب", "أسلوب النداء"])
-    if st.button("🔍 صحح لغتي العربية"):
-        if ar_ans == "أسلوب التعجب":
-            st.balloons()
-            st.success("✍️ رائعة! أسلوب تعجب على صيغة (مَا أَفْعَلَ!).")
-        else:
-            st.error("❌ خطأ، ركزي في صيغة الجملة وعلامة التعجب!")
-
-# ==================== ركن المشاريع ونصائح الامتحان ====================
-elif menu == "🛠️ ركن المشاريع ونصائح الامتحان":
-    st.header("💡 دليل التميز في الامتحانات")
+# ==================== 6. الامتحانات الموحدة الكاملة والطباعة ====================
+elif menu == "📝 الامتحانات الموحدة الكاملة (PDF / للطباعة)":
+    st.header("📝 بنك الامتحانات الموحدة المحلية والجهوية")
+    st.write("إليك نموذج امتحان موحد جهوي كامل في مادة الرياضيات. يمكنك نسخه وطباعته أو حله ورقياً:")
+    
     st.markdown("""
-    * 📋 **ابدئي بالأسئلة المباشرة المضمونة أولاً.**
-    * ⏱️ **إدارة الوقت:** لا تقفي عند تمرين صعب لأكثر من 10 دقائق.
-    * 🖊️ **التنظيم البصري:** الورقة النظيفة تضمن عدم ضياع النقاط!
+    ---
+    ### 📄 Examen Régional Blanc - Mathématiques 3AC
+    **Durée : 2 Heures | Coefficient : 3**
+    
+    #### Exercice 1 (6 Points) - Équations et Inéquations
+    1. Résoudre l'équation suivante : $3x - 5 = x + 7$
+    2. Résoudre l'équation : $(2x - 3)(x + 4) = 0$
+    3. Résoudre l'inéquation : $2x + 3 \\leq 7$
+    
+    #### Exercice 2 (4 Points) - Théorème de Pythagore
+    Soit $EFG$ un triangle rectangle en $E$ tel que $EF = 3$ et $EG = 4$.
+    1. Calculer la valeur du côté $FG$.
+    2. Soit $M$ un point tel que le triangle soit vérifié par la réciproque.
+    
+    #### Exercice 3 (5 Points) - Calcul Trigonométrique
+    1. Soit $x$ un angle aigu. Simplifier l'expression : $A = \cos^2(20^\\circ) + \cos^2(70^\\circ) + \sin(30^\\circ) - \\frac{1}{2}$
+    ---
     """)
+    st.info("💡 **نصيحة الأستاذ للطباعة:** يمكنك الضغط على زر (Ctrl + P) في لوحة المفاتيح لحفظ هذه الصفحة بالكامل كملف PDF أو طباعتها مباشرة على ورق لكي تحلي الامتحان بيدكِ!")
+
+# ==================== 7. مساعد المشاريع والبحوث الذكي ====================
+elif menu == "🛠️ مساعد المشاريع المدرسية والبحوث الذكي":
+    st.header("🛠️ مساعد البحوث والمشاريع المدرسية والبحث التلقائي")
+    st.write("أدخلي عنوان المشروع أو العرض (Exposé) المطلوب منكِ في الإعدادي، وسأعطيكِ خطة البحث الكاملة، وطرق البحث والمراجع:")
+    
+    user_project = st.text_input("اكتبي موضوع البحث هنا (مثلاً: أزمة الماء في المغرب، أخطار التلوث، التغذية المتوازنة):")
+    
+    if st.button("✨ ابحث وولد لي مشروعاً كاملاً"):
+        if user_project:
+            st.success(f"📋 تم إنشاء هيكل البحث الكامل لموضوع: ({user_project})")
+            st.markdown(f"""
+            ### 📑 ملف المشروع المدرسي جاهز للنسخ:
+
 
